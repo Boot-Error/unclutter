@@ -1,0 +1,56 @@
+buckets:
+  Archives:
+    - "*.zip"
+    - "*.7z"
+    - "*.rar"
+    - "*.xz"
+    - "*.jar"
+  Apps:
+    - "*.exe"
+    - "*.appx"
+    - "*.appxbundle"
+  Apps/Installers:
+    - "*.msi"
+    - "*.msixbundle"
+  DiskImages:
+    - "*.iso"
+    - "*.img"
+    - "*.raw"
+  Documents/Books:
+    - "*.epub"
+  Documents/Pdfs:
+    - "*.pdf"
+  Documents/WordDocs:
+    - "*.docx"
+  Documents/Spreadsheets:
+    - "*.xlsx"
+  Documents/Drawio:
+    - "*.drawio"
+  Documents/Excalidraw:
+    - "*.excalidraw"
+  Images:
+    - "*.png"
+    - "*.jpg"
+    - "*.jpeg"
+    - "*.jfif"
+  Media/Audio:
+    - "*.mp3"
+    - "*.ogg"
+  Media/Video:
+    - "*.mp4"
+    - "*.mkv"
+  Images/Vectors:
+    - "*.svg"
+  Text/json:
+    - "*.json"
+  Text/yaml:
+    - "*.yaml"
+    - "*.yml"
+  Text/csv:
+    - "*.csv"
+  Text:
+    - "*.txt"
+    - "*.ini"
+  3DModels:
+    - "*.stl"
+    - "*.obj"
