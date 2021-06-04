@@ -2,11 +2,17 @@ package main
 
 import (
 	"bytes"
+	_ "embed"
 	"log"
 	"os"
+	"path/filepath"
 
+	"github.com/kirsle/configdir"
 	"gopkg.in/yaml.v2"
 )
+
+//go:embed config.yaml
+var defaultConfigData string
 
 type Config struct {
 	Buckets map[string][]string `yaml:"buckets"`
@@ -38,4 +44,31 @@ func LoadConfig(configPath string) Config {
 	}
 
 	return config
+}
+
+func SetupConfigLocally() string {
+	configPath := configdir.LocalConfig("unclutter")
+	err := configdir.MakePath(configPath)
+	if err != nil {
+		log.Fatalf("Error %v", err)
+	}
+
+	configFile := filepath.Join(configPath, "config.yaml")
+
+	if _, err = os.Stat(configFile); os.IsNotExist(err) {
+		fh, err := os.Create(configFile)
+		if err != nil {
+			log.Fatalf("Error %v", err)
+		}
+		defer fh.Close()
+
+		_, err = fh.WriteString(defaultConfigData)
+		if err != nil {
+			log.Fatalf("Error %v", err)
+		}
+
+		fh.Sync()
+	}
+
+	return configFile
 }

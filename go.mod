@@ -1,8 +1,9 @@
 module unclutter
 
-go 1.15
+go 1.16
 
 require (
+	github.com/kirsle/configdir v0.0.0-20170128060238-e45d2f54772f
 	github.com/mattn/go-isatty v0.0.12 // indirect
 	github.com/mattn/go-tty v0.0.3 // indirect
 	github.com/superhawk610/bar v0.0.2

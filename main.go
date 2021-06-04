@@ -1,26 +1,31 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"log"
 	"os"
 )
 
 func getArgs() map[string]string {
-	allArgs := os.Args[1:]
-	if len(allArgs) < 2 {
-		fmt.Println("Error: Not enough arguments supplied")
-		os.Exit(1)
+
+	currentDir, err := os.Getwd()
+	if err != nil {
+		log.Fatalf("%v", err)
 	}
+	directoryToSort := flag.String("dir", currentDir, "directory to sort, default to current working directory")
+
+	flag.Parse()
 	argsMap := make(map[string]string)
-	argsMap["config"] = allArgs[0]
-	argsMap["directoryToSort"] = allArgs[1]
+	argsMap["directoryToSort"] = *directoryToSort
 
 	return argsMap
 }
 
 func main() {
 	args := getArgs()
-	config := LoadConfig(args["config"])
+	configFilePath := SetupConfigLocally()
+	config := LoadConfig(configFilePath)
 	buckets := LoadBucketsFromConfig(config.Buckets, args["directoryToSort"])
 	SortFilesIntoBuckets(&buckets, args["directoryToSort"], true)
 	fmt.Printf("Completed, %s is sorted", args["directoryToSort"])
